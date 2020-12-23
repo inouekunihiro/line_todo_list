@@ -19,13 +19,36 @@ class LineBotController < ApplicationController
     events.each do |event|
       # LINE からテキストが送信された場合
       if (event.type === Line::Bot::Event::MessageType::Text)
-        # LINE からテキストが送信されたときの処理を記述する
+        message = event["message"]["text"]
+        # binding.pry
+
+        # 送信されたメッセージをデータベースに保存するコードを書こう
+        # @message = Task.new(task: message)
+        # @message.save!
+
+        Task.create!(task: message)
+
+        # @message = LineBot.create!(message: message)
+
+
+        reply_message = {
+          type: "text",
+          text: "タスクに「#{message}」を登録！" # LINE に返すメッセージを考えてみよう
+        }
+        client.reply_message(event["replyToken"], reply_message)
+
+      # else message = "タスク一覧表示"
+        # Task.all
+
+
       end
     end
 
     # LINE の webhook API との連携をするために status code 200 を返す
     render json: { status: :ok }
   end
+
+
 
   private
 
