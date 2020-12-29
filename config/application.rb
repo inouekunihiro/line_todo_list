@@ -17,15 +17,14 @@ module LineTodoList
     # the framework and any gems in your application.
 
     # 以下を追記
-    config.generators do |g|
-      g.javascripts false
-      g.stylesheets false
-      g.helper false
-      g.test_framework false
-      g.template_engine false
-    end
+    # config.generators do |g|
+    #   g.javascripts false
+    #   g.stylesheets false
+    #   g.helper false
+    #   g.test_framework false
+    #   g.template_engine false
+    # end
 
-    config.api_only = true
-    config.middleware.use ActionDispatch::Flash
+    # config.middleware.use ActionDispatch::Flash
   end
 end
